@@ -8,6 +8,20 @@ MAX_GRADE = 5
 student_list = []
 current_id = 1
 
+ENABLE_LOGGING = True
+
+def log_action(action):
+    if ENABLE_LOGGING:
+        with open("log.txt", "a") as file:
+            file.write(action + "\n")
+
+def validate_grade(grade):
+    if not grade.isdigit():
+        return False
+
+    grade = int(grade)
+    return MIN_GRADE <= grade <= MAX_GRADE
+
 # Смешанная логика и интерфейс (плохо!)
 def create_student(student_id, name, group):
     return {
@@ -25,6 +39,7 @@ def add_student():
     if name and group:  # ❗ ИСПРАВЛЕНО: правильный отступ
         student = create_student(current_id, name, group)
         student_list.append(student)
+        log_action("Student added")
         current_id += 1
 
         # Обновляем список в интерфейсе
@@ -42,8 +57,9 @@ def add_grade():
         student = student_list[selection]
 
         grade = grade_entry.get()
-        if grade and grade.isdigit():
+        if validate_grade(grade):
             student["grades"].append(int(grade))
+            log_action("Grade added")
             grade_entry.delete(0, tk.END)
             messagebox.showinfo("Успех", f"Оценка {grade} добавлена для {student['name']}")
         else:
