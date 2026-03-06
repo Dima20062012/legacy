@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import messagebox  # Убрал лишний Listbox
 
+MIN_GRADE = 1
+MAX_GRADE = 5
+
 # Глобальные переменные (плохо!)
 student_list = []
 current_id = 1
@@ -42,7 +45,10 @@ def add_grade():
             grade_entry.delete(0, tk.END)
             messagebox.showinfo("Успех", f"Оценка {grade} добавлена для {student['name']}")
         else:
-            messagebox.showwarning("Ошибка", "Введите число от 1 до 5")
+            messagebox.showwarning(
+                "Ошибка",
+                f"Введите число от {MIN_GRADE} до {MAX_GRADE}"
+            )
     except:
         messagebox.showwarning("Ошибка", "Выберите студента!")
 
