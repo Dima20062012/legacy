@@ -9,6 +9,13 @@ student_list = []
 current_id = 1
 
 # Смешанная логика и интерфейс (плохо!)
+def create_student(student_id, name, group):
+    return {
+        "id": student_id,
+        "name": name,
+        "group": group,
+        "grades": []
+    }
 def add_student():
     global current_id, name_entry, group_entry, listbox  # ❗ ДОБАВЛЕНО: нужен доступ к глобальным переменным
     
@@ -16,12 +23,7 @@ def add_student():
     group = group_entry.get()
 
     if name and group:  # ❗ ИСПРАВЛЕНО: правильный отступ
-        student = {
-            "id": current_id,
-            "name": name,
-            "group": group,
-            "grades": []
-        }
+        student = create_student(current_id, name, group)
         student_list.append(student)
         current_id += 1
 
