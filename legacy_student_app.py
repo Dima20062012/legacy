@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox  # Убрал лишний Listbox
 
 # Глобальные переменные (плохо!)
-students = []
+student_list = []
 current_id = 1
 
 # Смешанная логика и интерфейс (плохо!)
@@ -19,7 +19,7 @@ def add_student():
             "group": group,
             "grades": []
         }
-        students.append(student)
+        student_list.append(student)
         current_id += 1
 
         # Обновляем список в интерфейсе
@@ -34,7 +34,7 @@ def add_student():
 def add_grade():
     try:
         selection = listbox.curselection()[0]
-        student = students[selection]
+        student = student_list[selection]
 
         grade = grade_entry.get()
         if grade and grade.isdigit():
